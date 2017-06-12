@@ -12,6 +12,8 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "livereload": "^0.6.2"
+    "livereload": "^0.6.2",
+    "mysql": "^2.13.0",
+    "node-fetch": "^1.7.1"
   }
 }
