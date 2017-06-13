@@ -14,7 +14,7 @@ function Component (config) {
 
     target.prototype.setDomTree = () => {
       target.domTree = document.createElement('div');
-      target.domTree.innerHTML = target.activeTempate;
+      target.domTree.innerHTML = target.prototype.templateString;
       const allowedEvents = ['onClick', 'onChange', 'onSubmit'];
       allowedEvents.forEach( (eventName) => {
         target.domTree.querySelectorAll(`[${eventName}]`).forEach( element => {
@@ -37,7 +37,7 @@ function Component (config) {
       })
     }
 
-    target.prototype.setDomTree();
+    // target.prototype.setDomTree();
 
 
     target.prototype.setMountingPoint = (domPoint) => {

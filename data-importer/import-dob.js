@@ -6,6 +6,8 @@ var DBService = require('../database/db-service');
 var tableName = 'jobs';
 var db = new DBService();
 
+// TODO: make this module import all data from API
+
 async function getData(){
   var response = await fetch('https://data.cityofnewyork.us/resource/rvhx-8trz.json?$order=job__ ASC')
   return await response.json();
@@ -13,15 +15,6 @@ async function getData(){
 
 async function createTable(sql) {
   return await db.query(sql);
-}
-
-function jsonToSql(row){
-  var keys = Object.keys(row);
-  var values = keys.reduce( (acc, key) => {
-    acc.push(row[key].replace(/'/g, "\\'").replace(/(\s*$)|(^\s*)/g, ''));
-    return acc;
-  }, []);
-  return 'REPLACE INTO ' + tableName + ' (' + keys.join(', ') + ') VALUES (\'' + values.join('\', \'') + '\');'
 }
 
 async function insertRow(row) {

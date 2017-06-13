@@ -22,7 +22,7 @@ class ComponentHandler {
       componentInstance.activeTempate = componentInstance.templateString.replace(new RegExp(`\{${key}\}`, 'g'), componentInstance[key]);
     })
 
-    console.log(componentInstance.activeTempate)
+    // console.log(componentInstance.activeTempate)
   }
 
   render(componentClass, mountingPoint) {

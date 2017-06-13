@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.use('/', express.static(process.cwd() + '/client'));
+app.use('/', express.static(process.cwd() + '/dist'));
 
 app.route('/api/dob-jobs')
   .get(function(req, res) {
