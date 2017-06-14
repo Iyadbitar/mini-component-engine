@@ -1,3 +1,5 @@
+import Components from '../components';
+
 let instance = null;
 
 class ComponentHandler {
@@ -8,6 +10,12 @@ class ComponentHandler {
     if(!instance){
       instance = this;
     }
+    this.components = Object.keys(Components).reduce( (acc, name) => {
+      acc[Components[name].selector] = Components[name];
+      return acc;
+    },{});
+
+    console.log(this.components)
     return instance;
   }
 

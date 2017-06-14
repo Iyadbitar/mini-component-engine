@@ -5,16 +5,22 @@
 
 		<!-- external CSS link -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- <link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/style.css"> -->
 
 	</head>
 	<body>
 
-		<div id="app-wrapper"></div>
-		<app></app>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="app-wrapper"></div>
+				</div>
+			</div>
+		</div>
 
 		<script src="bundle.js"></script>
-		<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script> -->
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
 	</body>
 </html>
