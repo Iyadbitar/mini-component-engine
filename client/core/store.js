@@ -34,6 +34,7 @@ class Store {
 
   subscribe(func) {
     this.handlers.push(func);
+    func(this.getState())
   }
 
   use(func) {

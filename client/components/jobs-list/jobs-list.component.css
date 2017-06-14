@@ -1,0 +1,12 @@
+:local .jobs-table {
+  border-spacing: 5px;
+  border-collapse: separate;
+}
+
+:local .table-header {
+  font-weight: 600;
+}
+
+:local .table-header th {
+  border-bottom: 1px solid #000;
+}

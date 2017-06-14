@@ -9,9 +9,7 @@ class Component {
 
   constructor(store){
     this.store = store;
-    if(this.onStateChange){
-      this.store.subscribe(this.onStateChange.bind(this))
-    }
+
     if(this.getInitialModel) {
       this.model = this.getInitialModel();
     }
@@ -19,6 +17,7 @@ class Component {
 
   setMountingPoint(domPoint) {
     this.mountingPoint = domPoint;
+    this.isMounted = true;
   }
 
   renderOn(domPoint) {
@@ -33,13 +32,13 @@ class Component {
 
   render() {
     const newDomTree = this.view.render(this.model);
-    if(this.isMounted) {
+    if(!this.isMounted) return;
+
+    if(this.mountingPoint.hasChildNodes()) {
       this.mountingPoint.replaceChild(newDomTree, this.currentDomTree);
     }
-    else {
-      // this.currentDomTree = this.view.render(this.model || this.getInitialModel() || {});
+    else{
       this.mountingPoint.appendChild(newDomTree);
-      this.isMounted = true;
     }
     this.currentDomTree = newDomTree;
   }

@@ -1,10 +1,37 @@
 // import ComponentHandler from './core/ComponentHandler';
 import AppComponent  from './components/app/app.component';
+import JobsListComponent  from './components/jobs-list/jobs-list.component';
 import Store from './core/store';
 
 const initialState = {
   jobs: {
-    data: [],
+    data: [
+      {
+        job__:'one',
+        doc__:'doc',
+        borough:'borough',
+        house: 'house'
+      },
+      {
+        job__:'one1',
+        doc__:'doc1',
+        borough:'borough1',
+        house: 'house1'
+      },
+      {
+        job__:'one2',
+        doc__:'doc2',
+        borough:'borough2',
+        house: 'house2'
+      },
+      {
+        job__:'one3',
+        doc__:'doc3',
+        borough:'borough3',
+        house: 'house3'
+      }
+
+    ],
     meta: {}
   },
   sort: {
@@ -32,8 +59,8 @@ function reducer(state, action) {
   }
 }
 
-var store = new Store(reducer, initialState)
+var store = new Store(reducer, initialState);
 
-var app = new AppComponent(store);
+var jobsList = new JobsListComponent(store);
 
-app.renderOn(document.getElementById('app-wrapper'))
+jobsList.renderOn(document.getElementById('jobs-list'));

@@ -1,12 +1,12 @@
 class View {
   template = '';
-  controler = null;
+  controller = null;
   domTree = null;
   style = null;
 
-  constructor(template, controler, style) {
+  constructor(template, controller, style) {
     this.template = template;
-    this.controler = controler;
+    this.controller = controller;
     this.style = style;
   }
 
@@ -16,27 +16,37 @@ class View {
       return template.replace(new RegExp(`\{${key}\}`, 'g'), model[key])
     }, this.template);
 
-    // creat dom tree out of template
-    this.domTree = document.createElement('div');
-    this.domTree.innerHTML = activeTemplate;
+    // create dom tree from template template string
+    const domType = {
+      [true]: 'div',
+      [activeTemplate.match(/^<tr?/g) !== null]: 'tbody'
+    }[true];
+    this.domTree = document.createDocumentFragment();
+    var tempDiv = document.createElement(domType);
+    tempDiv.innerHTML = activeTemplate;
+    while(tempDiv.childNodes.length > 0) {
+      this.domTree.appendChild(tempDiv.childNodes[0]);
+    }
 
-    // bind dom event to controler functions
-    const allowedEvents = ['onClick', 'onChange', 'onSubmit'];
-    allowedEvents.forEach( (eventName) => {
-    this.domTree.querySelectorAll(`[${eventName}]`).forEach( element => {
-        let functionName = element.attributes[eventName].value
-        if(functionName.indexOf('{') > -1 && functionName.indexOf('}') > -1){
-          functionName = functionName.replace(/[{}]/g, '');
-          element.removeAttribute(eventName);
+    // do the *repeat stuff
+    this.domTree.querySelectorAll('[data-repeat]').forEach( (element) => {
+      const repeatModel = model[element.attributes['data-repeat'].value];
+      if(!repeatModel) {
+        throw `Couldn't locate data-repeat property in model of ${this.controller.name}`
+      }
+      if(!Array.isArray(repeatModel)) {
+        throw `data-repeat is not Array in model of ${this.controller.name}`
+      }
 
-          if(this.controler[functionName]){
-            element.addEventListener(eventName.replace(/^on/g, '').toLowerCase(), this.controler[functionName].bind(this.controler))
-          }
-          else{
-            throw `"${eventName}" handler method "${functionName}" is not a memeber of ${this.name} component`;
-          }
-        }
+      element.removeAttribute('data-repeat');
+      const targetPoint = element.parentElement;
+      const html = element.outerHTML;
+
+      repeatModel.forEach( m => {
+        const view = new View(html, this.controller, this.style);
+        targetPoint.appendChild(view.render(m));
       })
+      targetPoint.removeChild(element)
     })
 
     // set style encapsulation
@@ -45,6 +55,25 @@ class View {
         return this.style[className] ? this.style[className] : className;
       })
       element.attributes.class.value = newClassProp.join(' ');
+    })
+
+    // bind dom event to controller functions
+    const allowedEvents = ['onClick', 'onChange', 'onSubmit'];
+    allowedEvents.forEach( (eventName) => {
+    this.domTree.querySelectorAll(`[${eventName}]`).forEach( element => {
+        let functionName = element.attributes[eventName].value
+        if(functionName.indexOf('{') > -1 && functionName.indexOf('}') > -1){
+          functionName = functionName.replace(/[{}]/g, '');
+          element.removeAttribute(eventName);
+
+          if(this.controller[functionName]){
+            element.addEventListener(eventName.replace(/^on/g, '').toLowerCase(), this.controller[functionName].bind(this.controller))
+          }
+          else{
+            throw `"${eventName}" handler method "${functionName}" is not a memeber of ${this.name} component`;
+          }
+        }
+      })
     })
 
     return this.domTree;

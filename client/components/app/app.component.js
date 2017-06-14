@@ -8,7 +8,6 @@ class AppComponent extends Component {
 
   constructor(store) {
     super(store);
-    console.log(style)
 
     this.view = new View(template, this, style);
 
@@ -42,9 +41,6 @@ class AppComponent extends Component {
     })
   }
 
-  componentWillMount() {
-    console.log('will')
-  }
 }
 
 
