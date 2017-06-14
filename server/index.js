@@ -8,7 +8,7 @@ var config = require('../config/');
 
 var app = express();
 var port = config.port || process.env.PORT;
-var livereload = livereload.createServer();
+var lvreload = livereload.createServer();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -21,6 +21,8 @@ app.use(function(req, res, next) {
   next();
 })
 
+
+
 app.use('/', express.static(process.cwd() + '/dist'));
 
 app.route('/api/dob-jobs')
@@ -32,3 +34,5 @@ app.route('/api/dob-jobs')
 var server = app.listen(config.port, function() {
   console.log('Server application running at http://localhost:' + config.port);
 })
+
+lvreload.watch(__dirname + '/../dist');

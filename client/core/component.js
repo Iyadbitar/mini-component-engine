@@ -21,18 +21,12 @@ class Component {
     this.mountingPoint = domPoint;
   }
 
-  mount() {
-    this.currentDomTree = this.view.render(this.model || this.getInitialModel() || {});
-    this.mountingPoint.appendChild(this.currentDomTree);
-    this.isMounted = true;
-  }
-
-  mountOn(domPoint) {
+  renderOn(domPoint) {
     this.setMountingPoint(domPoint);
-    this.mount();
+    this.render();
   }
 
-  unmount() {
+  distory() {
     this.mountingPoint.innerHTML('');
     this.isMounted = false;
   }
@@ -41,8 +35,13 @@ class Component {
     const newDomTree = this.view.render(this.model);
     if(this.isMounted) {
       this.mountingPoint.replaceChild(newDomTree, this.currentDomTree);
-      this.currentDomTree = newDomTree;
     }
+    else {
+      // this.currentDomTree = this.view.render(this.model || this.getInitialModel() || {});
+      this.mountingPoint.appendChild(newDomTree);
+      this.isMounted = true;
+    }
+    this.currentDomTree = newDomTree;
   }
 
 }

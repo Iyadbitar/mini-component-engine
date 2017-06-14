@@ -36,4 +36,4 @@ var store = new Store(reducer, initialState)
 
 var app = new AppComponent(store);
 
-app.mountOn(document.getElementById('app-wrapper'))
+app.renderOn(document.getElementById('app-wrapper'))
