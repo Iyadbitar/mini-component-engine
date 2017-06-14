@@ -6,7 +6,9 @@
 :local .table-header {
   font-weight: 600;
 }
-
+:local .table-header {
+  /*padding-bottom: 20px;*/
+}
 :local .table-header th {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #999;
 }

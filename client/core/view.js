@@ -16,7 +16,7 @@ class View {
       return template.replace(new RegExp(`\{${key}\}`, 'g'), model[key])
     }, this.template);
 
-    // create dom tree from template template string
+    // create dom tree from template string
     const domType = {
       [true]: 'div',
       [activeTemplate.match(/^<tr?/g) !== null]: 'tbody'
@@ -28,7 +28,7 @@ class View {
       this.domTree.appendChild(tempDiv.childNodes[0]);
     }
 
-    // do the *repeat stuff
+    // do the data-repeat stuff
     this.domTree.querySelectorAll('[data-repeat]').forEach( (element) => {
       const repeatModel = model[element.attributes['data-repeat'].value];
       if(!repeatModel) {
