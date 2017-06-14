@@ -4,6 +4,8 @@ import View from '../../core/view'
 import template from './jobs-list.component.html';
 import style from './jobs-list.component.css';
 
+import JobsService from '../../services/jobs.service';
+
 class JobsListComponent extends Component {
 
   constructor(store) {
@@ -13,7 +15,12 @@ class JobsListComponent extends Component {
 
     this.store.subscribe(this.onStateChange.bind(this))
 
-    console.log('this a job list component')
+    this.service = new JobsService();
+
+    this.service.getJobs()
+    .then(
+      console.log
+    )
   }
 
   getInitialModel() {

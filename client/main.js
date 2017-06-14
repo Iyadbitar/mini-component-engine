@@ -1,9 +1,10 @@
-// import ComponentHandler from './core/ComponentHandler';
 import AppComponent  from './components/app/app.component';
 import JobsListComponent  from './components/jobs-list/jobs-list.component';
 import Store from './core/store';
+import { ConfigLoadAction, LOAD_CONFIG_TYPE } from './actions/cofing-load.action';
 
 const initialState = {
+  config: {},
   jobs: {
     data: [
       {
@@ -47,19 +48,17 @@ const initialState = {
 
 function reducer(state, action) {
   switch(action.type){
-    case 'ADD_JOB':
-      const jobs = {
-        data: state.jobs.data.concat(action.payload.data)
-      }
-      return {...state, jobs};
-    case 'CHANGE_TITLE':
-      return {...state, ...action.payload}
+    case LOAD_CONFIG_TYPE:
+      const config = action.payload
+      return {...state, config};
     default:
       return state;
   }
 }
 
 var store = new Store(reducer, initialState);
+
+store.dispatch(ConfigLoadAction)
 
 var jobsList = new JobsListComponent(store);
 
