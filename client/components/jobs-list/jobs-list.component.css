@@ -1,6 +1,7 @@
 :local .jobs-table {
   border-spacing: 5px;
   border-collapse: separate;
+  width:100%;
 }
 
 :local .table-header {
@@ -11,4 +12,13 @@
 }
 :local .table-header th {
   border-bottom: 1px solid #999;
+}
+:local .table-tr td {
+  padding:2px 5px;
+}
+:local .table-tr{
+  background-color: #efefef;
+}
+:local .table-tr:hover {
+  background-color: #e8e8e8;
 }

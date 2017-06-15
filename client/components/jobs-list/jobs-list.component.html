@@ -1,26 +1,37 @@
-<div class="row">
-  <div class="col-sm-12">
-    <div class="job-list">
+<div class="{colClass}">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="job-list">
 
-      <table class="jobs-table">
-        <thead class="table-header">
-          <tr>
-            <th>Job#</th>
-            <th>Doc#</th>
-            <th>Borough</th>
-            <th>House#</th>
-          </tr>
-        </thead>
+        <table class="jobs-table">
+          <thead class="table-header">
+            <tr>
+              <th>Job#</th>
+              <th>Doc#</th>
+              <th>Borough</th>
+              <th>House#</th>
+              <th>Streen Name</th>
+              <th>Block</th>
+              <th>Lot</th>
+              <th>More</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr data-repeat="data">
-            <td>{job__}</td>
-            <td>{doc__}</td>
-            <td>{borough}</td>
-            <td>{house}</td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr data-repeat="data" class="table-tr">
+              <td>{job__}</td>
+              <td>{doc__}</td>
+              <td>{borough}</td>
+              <td>{house__}</td>
+              <td>{street_name}</td>
+              <td>{block}</td>
+              <td>{lot}</td>
+              <td align="center"><a class="btn btn-primary btn-sm" onClick="[moreClick(id)]">Details</a>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
 </div>

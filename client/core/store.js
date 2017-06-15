@@ -1,3 +1,4 @@
+import { AsyncStatusAction } from '../actions/async-active.action';
 let instance = null;
 
 class Store {
@@ -10,7 +11,7 @@ class Store {
     this.reducer = reducer;
 
     this.state = initialState;
-    this.dispatch({})
+    // this.dispatch({})
 
     if(!instance){
       instance = this;
@@ -23,7 +24,23 @@ class Store {
   }
 
   dispatch(action) {
-    const oldState = this.state;
+    const oldState = this.getState();
+    const isAsync = action.promise ? true : false;
+
+    const asyncPromise = isAsync ?
+      action.promise(this.getState.bind(this), this.dispatch.bind(this))
+      : new Promise( () => true);
+
+    if(isAsync){
+      this.dispatch(AsyncStatusAction(true));
+      asyncPromise()
+      .then(() => {
+        this.dispatch(AsyncStatusAction(false));
+        this.notify(oldState)
+      });
+      return;
+    }
+
     this.state = this.reducer(this.state, action);
     this.notify(oldState);
   }

@@ -1,5 +1,5 @@
 var config = {
-  apiUrl: 'http://localhost/api/'
+  apiUrl: 'http://localhost:8800/api/'
 };
 
 module.exports = config;

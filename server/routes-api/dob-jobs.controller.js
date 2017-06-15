@@ -79,7 +79,7 @@ const EXTRA_FIELDS = [
 const ALL_FIELDS = [...BASIC_FIELDS, ...EXTRA_FIELDS]
 
 const DEFAULTS = {
-  sortBy: 'job__',
+  orderBy: 'job__',
   order: 'DESC',
   pageSize: 20,
   page: 1
@@ -87,7 +87,7 @@ const DEFAULTS = {
 
 DobJobsController.prototype.getDobJobs = function (req, res) {
   db = new DBService();
-  
+
   let meta = Object.assign({}, DEFAULTS, req.query);
 
   if(ALL_FIELDS.indexOf(meta.orderBy) < 0) {
@@ -103,9 +103,15 @@ DobJobsController.prototype.getDobJobs = function (req, res) {
 
   let limitStart = (meta.page - 1) * meta.pageSize;
   let limitEnd = limitStart + meta.pageSize;
+  let where = '';
+  if(meta.searchValue){
+    where = ALL_FIELDS.reduce( (acc, field) => {
+      return acc + `OR ${field} LIKE '%${meta.searchValue}%' `;
+    }, 'WHERE 1=2 ')
+  }
 
-  const countQuery = 'SELECT COUNT(id) AS total FROM jobs';
-  const dataQuery = `SELECT ${BASIC_FIELDS.join(', ')} from jobs ORDER BY ${meta.sortBy} ${meta.order} LIMIT ${limitStart}, ${limitEnd}`;
+  const countQuery = `SELECT COUNT(id) AS total FROM jobs ${where}`;
+  const dataQuery = `SELECT ${BASIC_FIELDS.join(', ')} from jobs ${where} ORDER BY ${meta.orderBy} ${meta.order} LIMIT ${limitStart}, ${limitEnd}`;
 
   Promise.all([db.query(dataQuery), db.query(countQuery)])
   .then( result => {
@@ -113,12 +119,14 @@ DobJobsController.prototype.getDobJobs = function (req, res) {
       const total = result[1][0].total;
 
       meta.total = total;
+      meta.totalPages = Math.ceil(total / meta.pageSize)
 
       res.json( {
         data, meta
       });
   })
   .catch(error => {
+    console.log(error)
     res.status(500).send();
   })
 }
@@ -131,7 +139,7 @@ DobJobsController.prototype.getJob = function (req, res) {
     id = 0;
   }
   const dataQuery = `SELECT ${ALL_FIELDS.join(', ')} from jobs WHERE id = ${id}`;
-  db.query(dataQuery).then(job => res.json(job));
+  db.query(dataQuery).then(job => res.json(job[0]));
 }
 
 DobJobsController.prototype.getSchema = function (req, res) {

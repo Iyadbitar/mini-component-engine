@@ -18,6 +18,10 @@ class Component {
   setMountingPoint(domPoint) {
     this.mountingPoint = domPoint;
     this.isMounted = true;
+
+    if(this.componentDidMount){
+      this.componentDidMount();
+    }
   }
 
   renderOn(domPoint) {
@@ -31,15 +35,14 @@ class Component {
   }
 
   render() {
-    const newDomTree = this.view.render(this.model);
     if(!this.isMounted) return;
-
-    if(this.mountingPoint.hasChildNodes()) {
-      this.mountingPoint.replaceChild(newDomTree, this.currentDomTree);
+    const newDomTree = this.view.render(this.model);
+    if(this.mountingPoint.hasChildNodes() && this.mountingPoint) {
+      while(this.mountingPoint.firstChild){
+        this.mountingPoint.removeChild(this.mountingPoint.firstChild)
+      }
     }
-    else{
-      this.mountingPoint.appendChild(newDomTree);
-    }
+    this.mountingPoint.appendChild(newDomTree);
     this.currentDomTree = newDomTree;
   }
 

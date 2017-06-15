@@ -6,7 +6,7 @@ class JobsService {
 
   urls = {
     schema: 'dob-jobs/schema/',
-    job: 'dob-jobs/job/',
+    jobDetails: 'dob-jobs/job/',
     all: 'dob-jobs/'
   }
 
@@ -18,9 +18,10 @@ class JobsService {
 
   }
 
-  getJobs() {
-    return http.get('http://localhost:8800/api/' + this.urls.all)
+  get(url, query) {
+    return http.get(url, query)
   }
+
 }
 
 export default JobsService;

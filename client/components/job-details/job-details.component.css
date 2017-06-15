@@ -1,0 +1,26 @@
+:local .details {
+  position: relative;
+}
+:local .heading {
+  border-bottom: 1px solid #999;
+  padding-bottom: 5px;
+  margin-top:0;
+  padding-top:5px;
+}
+:local .close {
+  display: block;
+  position: absolute;
+  top:0;
+  right:0;
+  padding-top: 5px;
+}
+:local .details-row {
+  padding:5px;
+}
+:local .details-row:nth-child(2n) {
+  background-color:#efefef;
+}
+:local .details-row strong {
+  display: inline-block;
+  width:50%;
+}
