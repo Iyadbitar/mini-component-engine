@@ -3,8 +3,8 @@ var config = {
   port: 8800,
   database: {
     host:'localhost',
-    username: 'root',
-    password: 'corvet',
+    username: '',
+    password: '',
     database: 'dobjobs'
   }
 };
