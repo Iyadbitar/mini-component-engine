@@ -32,4 +32,5 @@ You need latest version of Node there is a lot of ES6 code and async/await in se
 5. I think (hopefully) what I did to this point should give you good idea about my JavaScript and application architectural skills
 
 
-## Thank You for the chance, P.S I enjoyed building it hope you like what I did
+## Thank You! for the chance.
+### P.S I enjoyed building it hope you like what I did
