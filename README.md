@@ -24,10 +24,10 @@ You need latest version of Node there is a lot of ES6 code and async/await in se
 10. I didn't use jQuery and all code is vanilla JavaScript
 
 
-###Notes
+### Notes
 1. I wanted to do more but I don't have enough time
 2. The sorting feature is missing but this any easy addition and I think this should give you good idea about my JavaScript application architectural skills
 3. Data importer will import only 1000 record available in first page of DOB api, also here I wanted to do more and load all data through child process in Node but I don't have time.
 
 
-##Thank You
+## Thank You
