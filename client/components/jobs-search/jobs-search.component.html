@@ -1,9 +1,10 @@
 <div class="search clearfix">
   <div class="col-sm-4">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." onChange="[searchValueChange]">
+      <input type="text" class="form-control" placeholder="Search for..." onChange="[searchValueChange]" value="{searchValue}">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" onClick="[searchClick]">Search!</button>
+        <button class="btn btn-default btn-warning {clearBtnClass}" type="button" onClick="[clearClick]">Clear</button>
+        <button class="btn btn-default btn-primary" type="button" onClick="[searchClick]">Search!</button>
       </span>
     </div>
   </div>

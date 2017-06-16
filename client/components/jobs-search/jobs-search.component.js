@@ -26,7 +26,8 @@ class JobsSearchComponent extends Component {
   }
 
   mapStateToModel(state) {
-    return { ...state.uiState.search };
+    const clearBtnClass = state.uiState.search.searchValue.length == 0 ? 'hidden' : '';
+    return { ...state.uiState.search, clearBtnClass };
   }
 
   onStateChange(newState, oldState) {
@@ -40,14 +41,23 @@ class JobsSearchComponent extends Component {
 
   searchClick(){
     if(this.searchValue.length > 2){
-      this.store.dispatch(UpdateSearchAction(this.searchValue));
-      this.store.dispatch(JobsSearchLoadAction());
+      this.dipatchActions();
     }
 
   }
 
   searchValueChange(event) {
     this.searchValue = event.target.value
+  }
+
+  clearClick() {
+    this.searchValue = '';
+    this.dipatchActions();
+  }
+
+  dipatchActions() {
+    this.store.dispatch(UpdateSearchAction(this.searchValue));
+    this.store.dispatch(JobsSearchLoadAction());
   }
 
 }

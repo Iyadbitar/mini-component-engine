@@ -7,7 +7,7 @@ export const JobsLoadAction = () => {
     promise: (getState, dispatch) => () => {
       const { config, uiState } = getState();
       const jobsService = new JobsService();
-      return jobsService.get(config.apiUrl + jobsService.urls.all, uiState.sort)
+      return jobsService.get(config.apiUrl + jobsService.urls.all, {...uiState.sort, ...uiState.pagination})
         .then( jobsData => dispatch(UpdateJobsAction(jobsData)) )
     }
   }
@@ -45,10 +45,16 @@ export const UpdateJobDetailsAction = (job) => {
 
 export const UPDATE_SEARCH_TYPE = 'UPDATE_SEARCH';
 export const UpdateSearchAction = (search) => {
-
   return {
     type: UPDATE_SEARCH_TYPE,
-    payload : { searchValue:search }
+    payload : {
+      search: {
+        searchValue: search
+      },
+      pagination: {
+        page: 1
+      }
+    }
   }
 }
 
@@ -61,8 +67,16 @@ export  const JobsSearchLoadAction = () => {
       const { config, uiState } = getState();
       const jobsService = new JobsService();
 
-      return jobsService.get(config.apiUrl + jobsService.urls.all, {...uiState.sort, ...uiState.search})
+      return jobsService.get(config.apiUrl + jobsService.urls.all, {...uiState.sort, ...uiState.search, ...uiState.pagination})
         .then( jobsData => dispatch(UpdateJobsAction(jobsData)) )
     }
+  }
+}
+
+export const CHANGE_JOBS_PAGE_TYPE = 'CHANGE_JOBS_PAGE';
+export const UpdateJobsPageAction = (page) => {
+  return {
+    type: CHANGE_JOBS_PAGE_TYPE,
+    payload : { page }
   }
 }

@@ -120,6 +120,7 @@ DobJobsController.prototype.getDobJobs = function (req, res) {
 
       meta.total = total;
       meta.totalPages = Math.ceil(total / meta.pageSize)
+      meta.currentPageTotal = data.length < meta.pageSize ? data.length : meta.pageSize
 
       res.json( {
         data, meta

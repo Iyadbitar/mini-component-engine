@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:import": "node ./data-importer/import-dob.js",
+    "client:build": "cd ./client && webpack",
+    "client:watch": "cd ./client && webpack --watch",
+    "server:run": "node ./server"
   },
   "author": "",
   "license": "ISC",

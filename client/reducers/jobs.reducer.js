@@ -4,7 +4,8 @@ import { ASYNC_LOAD_JOBS_TYPE,
   ASYNC_LOAD_JOB_DETAILS_TYPE,
   UPDATE_JOB_DETAILS_TYPE,
   UPDATE_SEARCH_TYPE,
-  ASYNC_JOBS_SEARCH_TYPE } from '../actions/jobs-load.action';
+  ASYNC_JOBS_SEARCH_TYPE,
+  CHANGE_JOBS_PAGE_TYPE } from '../actions/jobs-load.action';
 
 
 import { ASYNC_ACTIVE_TYPE } from '../actions/async-active.action';
@@ -27,13 +28,16 @@ function jobsReducer(state, action) {
       let jobDetails = {...action.payload.job}
       return {...state, jobDetails};
     case UPDATE_SEARCH_TYPE:
-      let search = { ...state.uiState.search};
-      search = {...search, ...action.payload};
-      var uiState  = {...state.uiState, search}
-      console.log({ ...state, uiState})
+      let search = { ...state.uiState.search, ...action.payload.search};
+      let pagination = {...state.uiState.pagination, ...action.payload.pagination};
+      var uiState  = {...state.uiState, search, pagination}
       return { ...state, uiState};
     case ASYNC_JOBS_SEARCH_TYPE:
       return state;
+    case CHANGE_JOBS_PAGE_TYPE:
+      var uiState = {...state.uiState};
+      uiState.pagination.page = action.payload.page;
+      return {...state, uiState};
     default:
       return state;
   }

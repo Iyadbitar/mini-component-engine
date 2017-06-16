@@ -1,0 +1,14 @@
+:local .wrapper {
+  padding-bottom: 1rem;
+}
+:local .report {
+  padding: 1rem 5px;
+  float: left;
+}
+
+:local .pagination {
+  float: right;
+}
+:local .button {
+  margin-right: 5px;
+}

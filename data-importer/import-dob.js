@@ -34,7 +34,6 @@ getData()
   var data = result.slice();
   var allKeys = Object.keys(data.reduce( (acc, item) => Object.assign(acc, item), {}));
   var columns = allKeys.map((column) => column + (column === 'job__' ? ' varchar(10) NOT NULL' : ' text NULL'));
-  console.log(allKeys.join('\', \n\''))
   endProcess();
   var createSql = 'CREATE TABLE IF NOT EXISTS jobs (id bigint NOT NULL AUTO_INCREMENT, ' + columns.join(', ') +', PRIMARY KEY (id), UNIQUE (job__) );';
   createTable(createSql);
