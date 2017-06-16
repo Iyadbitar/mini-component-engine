@@ -21,7 +21,8 @@ You need latest version of Node there is a lot of ES6 code and async/await in se
 7. with Redux pattern most of the code will be in actions and reducers, I create one reducer to do everything
 8. Redux has the option of middleware but in my implementation I dropped this option and hard coded the middleware that does async operation in the store code.
 9. CSS encapsulation in component achieved by css-loader for webpack
-10. I didn't use jQuery and all code is vanilla JavaScript
+10. Search will search all fields which will work as filter
+11. I didn't use jQuery and all code is vanilla JavaScript
 
 
 ### Notes

@@ -1,5 +1,3 @@
-import AppComponent  from './components/app/app.component';
-
 import JobsListComponent  from './components/jobs-list/jobs-list.component';
 import JobDetailsComponent from './components/job-details/job-details.component';
 import JobsSearchComponent from './components/jobs-search/jobs-search.component';
