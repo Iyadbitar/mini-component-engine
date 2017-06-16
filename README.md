@@ -34,4 +34,4 @@ You need latest version of Node there is a lot of ES6 code and async/await in se
 
 
 ## Thank You! for the chance.
-### P.S I enjoyed building it hope you like what I did
+### P.S. I enjoyed building it hope you like what I did
