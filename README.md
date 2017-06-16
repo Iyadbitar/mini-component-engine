@@ -25,9 +25,10 @@ You need latest version of Node there is a lot of ES6 code and async/await in se
 
 
 ### Notes
-1. I wanted to do more but I don't have enough time
-2. The sorting feature is missing but this any easy addition and I think I did to this point should give you good idea about my JavaScript and application architectural skills
-3. Data importer will import only 1000 record available in first page of DOB api, also here I wanted to do more and load all data through child process in Node but I don't have time.
+1. I wanted to do more but I don't have enough time, so there is some code redundancy that can by DRYed and also I took a lot of shortcuts in the code just to finish quickly
+2. The sorting feature is missing but this any easy addition
+3. Data importer will import only 1000 record available in first page of DOB api, also here I wanted to do more and load all data through child process in Node but I don't have time
+5. I think (hopefully) what I did to this point should give you good idea about my JavaScript and application architectural skills
 
 
 ## Thank You
