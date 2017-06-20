@@ -105,8 +105,9 @@ DobJobsController.prototype.getDobJobs = function (req, res) {
   let limitEnd = limitStart + meta.pageSize;
   let where = '';
   if(meta.searchValue){
+    const escaped = db.escape(meta.searchValue);
     where = ALL_FIELDS.reduce( (acc, field) => {
-      return acc + `OR ${field} LIKE '%${meta.searchValue}%' `;
+      return acc + `OR ${field} LIKE '%${escaped}%' `;
     }, 'WHERE 1=2 ')
   }
 

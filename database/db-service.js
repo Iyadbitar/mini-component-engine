@@ -28,6 +28,10 @@ DBService.prototype.query = function(query){
   });
 }
 
+DBService.prototype.escape = function(str) {
+  return str.replace(/[']/g, '\\\'');
+}
+
 DBService.prototype.end = function() {
   dbConnection.end();
 }

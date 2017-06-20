@@ -49,6 +49,7 @@ class JobsListComponent extends Component {
     return this.model.selectedId == id ? 'selected' : '';
   }
 
+
 }
 
 
